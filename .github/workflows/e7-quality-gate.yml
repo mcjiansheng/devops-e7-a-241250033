@@ -42,7 +42,7 @@ jobs:
           set -euo pipefail
           mkdir -p work/ci
           git rev-parse HEAD > work/ci/commit.txt
-          git config --local user.name "谢浩天 241250033"
+          git config --local user.name "241250033"
           git config --local user.email "52848497+mcjiansheng@users.noreply.github.com"
           python3 -c 'import json,os,platform; print(json.dumps({"hostname":platform.node(),"platform":platform.platform(),"runner_name":os.environ.get("RUNNER_NAME"),"student":"谢浩天 241250033"},ensure_ascii=False,indent=2))' > work/ci/host.json
           python3 scripts/doctor.py --out work/ci/env.json > work/ci/doctor.log

@@ -9,3 +9,7 @@
 work/
 __pycache__/
 .pytest_cache/
+
+# macOS archive metadata
+._*
+.DS_Store

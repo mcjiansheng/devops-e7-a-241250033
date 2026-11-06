@@ -13,3 +13,5 @@
 buildchecker 核心算法和 E7 gate 实现未改。沿用 E6 个人新增的依赖一致性测试，并给 E7 oracle 新增两条拒绝错误报告的行为测试；E7 oracle 预期共 8 条。
 
 实验与测试只在服务器 `60.204.240.40` 的 `/root/241250033/e7-a` 执行。当前修改待服务器验证；本地未运行实验或测试。
+
+构建使用服务器已缓存的 DaoCloud Python 基础镜像，内容 digest 与模板相同。Dockerfile 使用内置 frontend，避免无须使用的外部 syntax 镜像下载。
