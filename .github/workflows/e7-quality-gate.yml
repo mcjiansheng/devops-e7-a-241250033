@@ -22,13 +22,23 @@ concurrency:
 jobs:
   quality-gate:
     name: e7-a-quality-gate
-    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: [self-hosted, Linux, X64, devops-241250033]
     timeout-minutes: 30
     env:
       IMAGE: e7-buildchecker:241250033-ci
       FAIL_DEMO: ${{ inputs.fail_demo }}
     steps:
+      - name: Reject external PRs before checking out code
+        env:
+          PR_HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+          CURRENT_REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          if [[ -n "$PR_HEAD_REPO" && "$PR_HEAD_REPO" != "$CURRENT_REPO" ]]; then
+            echo "This course runner only accepts branches in $CURRENT_REPO."
+            exit 1
+          fi
+
       - name: Check out the exact triggering revision
         uses: actions/checkout@v7.0.1
         with:
